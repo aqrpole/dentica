@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  openemr:
+    image: openemr/openemr:7.0.3
+    ports:
+      - "8080:80"
+      - "8443:443"
+    volumes:
+      - ./custom:/var/www/localhost/htdocs/openemr/custom
+      - ./modules:/var/www/localhost/htdocs/openemr/modules
+      - ./sites:/var/www/localhost/htdocs/openemr/sites
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_ROOT_PASS: root
+      MYSQL_USER: openemr
+      MYSQL_PASS: openemr
+      MYSQL_DATABASE: openemr
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mariadb:10.6
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: openemr
+      MYSQL_USER: openemr
+      MYSQL_PASSWORD: openemr
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:
