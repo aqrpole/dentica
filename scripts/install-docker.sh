@@ -1,3 +1,10 @@
+# How to use
+#	chmod +x install-docker.sh
+#	sudo ./install-docker.sh
+# Then log out / reboot, and test:
+#	docker run hello-world
+#	docker compose version
+#
 #!/usr/bin/env bash
 set -e
 
